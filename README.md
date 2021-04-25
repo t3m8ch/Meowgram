@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="screenshots/Meowgram-preview.png" alt="Preview"/>
+  <img src="screenshots/Meowgram-demo.gif" alt="Preview"/>
 </p>
 
 ## 🐱 Why Meogram?
