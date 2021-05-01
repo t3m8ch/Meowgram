@@ -110,7 +110,8 @@ class MeowgramWindow(Handy.ApplicationWindow):
         for dialog in dialogs:
             self.contacts_listbox.insert(ContactRow(dialog), -1)
 
-    def update_messages_listbox(self, messages):
+    def update_messages_listbox(self, future):
+        messages = future.result()
         current_messages = self.messages_listbox.get_children()
         for message in current_messages:
             self.messages_listbox.remove(message)
@@ -146,7 +147,7 @@ class MeowgramWindow(Handy.ApplicationWindow):
         try:
             contact = row.get_child()
             self.update_headerbar(contact)
-            messages_manager.show_messages(self, contact.chat_id)
+            future = messages_manager.show_messages(contact.chat_id, self.update_messages_listbox)
             self.scroll_to_bottom_messages()
         except AttributeError as error:
             logging.debug(error)
