@@ -64,7 +64,7 @@ class MeowgramWindow(Handy.ApplicationWindow):
                                           GObject.BindingFlags.BIDIRECTIONAL)
 
         self.load_window_size()
-        dialogs_manager.show_dialogs(self)
+        future = dialogs_manager.show_dialogs(self.update_contacts_listbox)
         self.update_view()
 
         # TODO add button to scroll down
@@ -105,7 +105,8 @@ class MeowgramWindow(Handy.ApplicationWindow):
         self.messages_headerbar.set_title(contact_name)
         self.messages_headerbar.set_subtitle(subtitle)
 
-    def update_contacts_listbox(self, dialogs):
+    def update_contacts_listbox(self, future):
+        dialogs = future.result()
         for dialog in dialogs:
             self.contacts_listbox.insert(ContactRow(dialog), -1)
 
